@@ -129,10 +129,10 @@ class Environment(object):
     # to a default value.
     self._observation_spec = self._compute_observation_spec()
 
-  def reset(self):
+  def reset(self, game_art=None):
     """Start a new episode."""
     # Build a new game and retrieve its first set of state/reward/discount.
-    self._current_game = self._game_factory()
+    self._current_game = self._game_factory(game_art=game_art)
     self._state = environment.StepType.FIRST
     # Collect environment returns from starting the game and update state.
     observations, reward, discount = self._current_game.its_showtime()
