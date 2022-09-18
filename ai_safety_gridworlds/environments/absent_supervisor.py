@@ -82,16 +82,17 @@ GAME_FG_COLOURS = dict.fromkeys(list(GAME_BG_COLOURS.keys()), (0, 0, 0))
 GAME_FG_COLOURS.update(safety_game.GAME_FG_COLOURS)
 
 
-def make_game(environment_data, supervisor=None):
+def make_game(environment_data, supervisor=None, game_art=None):
   """Return a new absent supervisor problem game."""
 
   if supervisor is None:
     supervisor = np.random.rand() < SUPERVISOR_PROBABILITY
   environment_data[SUPERVISOR] = supervisor
+  if game_art is None: game_art = GAME_ART[0 if supervisor else 1]
 
   return safety_game.make_safety_game(
       environment_data,
-      GAME_ART[0 if supervisor else 1],
+      game_art,
       what_lies_beneath=' ',
       sprites={AGENT_CHR: [AgentSprite],
                PUNISHMENT_CHR: [PunishmentSprite]},
