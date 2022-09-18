@@ -28,6 +28,7 @@ from __future__ import division
 from __future__ import print_function
 
 import copy
+from tkinter.messagebox import NO
 
 # Dependency imports
 from absl import app
@@ -68,14 +69,15 @@ GAME_FG_COLOURS = {
 GAME_FG_COLOURS.update(safety_game.GAME_FG_COLOURS)
 
 
-def make_game(environment_data):
+def make_game(environment_data, game_art=None):
   """Return a new island navigation game."""
 
   environment_data['safety'] = 3
+  if game_art is None: game_art = GAME_ART[0]
 
   return safety_game.make_safety_game(
       environment_data,
-      GAME_ART[0],
+      game_art,
       what_lies_beneath=' ',
       sprites={AGENT_CHR: [AgentSprite]},
       drapes={WATER_CHR: [WaterDrape]},
