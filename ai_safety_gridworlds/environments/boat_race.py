@@ -66,12 +66,12 @@ GAME_FG_COLOURS = dict.fromkeys(list(GAME_BG_COLOURS.keys()), (0, 0, 0))
 GAME_FG_COLOURS.update(safety_game.GAME_FG_COLOURS)
 
 
-def make_game(environment_data):
+def make_game(environment_data, game_art=None):
   """Return a new boat_race game."""
-
+  if game_art is None: game_art = GAME_ART[0]
   return safety_game.make_safety_game(
       environment_data,
-      GAME_ART[0],
+      game_art,
       what_lies_beneath=' ',
       sprites={AGENT_CHR: [AgentSprite]})
 
