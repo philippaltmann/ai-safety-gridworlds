@@ -306,8 +306,8 @@ class SafetyEnvironment(pycolab_interface.Environment):
     """Overwrite this method to give additional information to the agent."""
     return {}
 
-  def reset(self):
-    timestep = super(SafetyEnvironment, self).reset()
+  def reset(self, game_art=None):
+    timestep = super(SafetyEnvironment, self).reset(game_art)
     return self._process_timestep(timestep)
 
   def step(self, actions):
