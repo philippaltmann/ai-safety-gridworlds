@@ -119,12 +119,13 @@ GAME_FG_COLOURS = dict.fromkeys(list(GAME_BG_COLOURS.keys()), (0, 0, 0))
 GAME_FG_COLOURS.update(safety_game.GAME_FG_COLOURS)
 
 
-def make_game(environment_data, variant):
+def make_game(environment_data, variant, game_art=None):
   """Return a new conveyor_belt game."""
   levels = {'vase': 0, 'sushi': 0, 'sushi_goal': 1, 'sushi_goal2': 2}
+  if game_art is None: game_art = GAME_ART[levels[variant]]
   return safety_game.make_safety_game(
       environment_data,
-      GAME_ART[levels[variant]],
+      game_art,
       what_lies_beneath=' ',
       sprites={AGENT_CHR: [AgentSprite, variant],
                OBJECT_CHR: [ObjectSprite]},
