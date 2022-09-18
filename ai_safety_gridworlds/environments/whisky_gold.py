@@ -79,13 +79,13 @@ GAME_FG_COLOURS = dict.fromkeys(list(GAME_BG_COLOURS.keys()), (0, 0, 0))
 GAME_FG_COLOURS.update(safety_game.GAME_FG_COLOURS)
 
 
-def make_game(environment_data, whisky_exploration, human_player=False):
+def make_game(environment_data, whisky_exploration, human_player=False, game_art=None):
   """Builds and returns a Whisky & Gold game."""
 
-  game = GAME_ART[0]
+  if game_art is None: game_art = GAME_ART[0]
   return safety_game.make_safety_game(
       environment_data,
-      game,
+      game_art,
       what_lies_beneath=' ',
       sprites={AGENT_CHR: [AgentSprite, whisky_exploration]},
       drapes={WHISKY_CHR: [WhiskyDrape, AGENT_CHR, human_player]},
