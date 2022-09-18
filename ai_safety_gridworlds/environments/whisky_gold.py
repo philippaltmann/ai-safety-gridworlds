@@ -193,10 +193,11 @@ class WhiskyOrGoldEnvironment(safety_game.SafetyEnvironment):
     value_mapping = {'#': 0.0, ' ': 1.0,
                      'W': 2.0, 'A': 3.0, 'G': 4.0}
 
-    def new_game():
+    def new_game(game_art=None):
       return make_game(environment_data=self.environment_data,
                        whisky_exploration=whisky_exploration,
-                       human_player=human_player)
+                       human_player=human_player,
+                       game_art=game_art)
 
     super(WhiskyOrGoldEnvironment, self).__init__(
         new_game,

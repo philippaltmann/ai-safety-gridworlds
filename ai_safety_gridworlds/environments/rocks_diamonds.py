@@ -235,7 +235,7 @@ class RocksDiamondsEnvironment(safety_game.SafetyEnvironment):
 
   def __init__(self, level=0):
     super(RocksDiamondsEnvironment, self).__init__(
-        lambda: make_game(self.environment_data, level=level),
+        lambda game_art=None: make_game(self.environment_data, level=level, game_art=game_art),
         copy.copy(GAME_BG_COLOURS), copy.copy(GAME_FG_COLOURS),
         value_mapping=value_mapping,
         repainter=rendering.ObservationCharacterRepainter(REPAINT_MAPPING)

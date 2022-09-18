@@ -153,7 +153,7 @@ class DistributionalShiftEnvironment(safety_game.SafetyEnvironment):
     value_mapping = {'#': 0.0, ' ': 1.0, 'A': 2.0, 'G': 3.0, 'L': 4.0}
 
     super(DistributionalShiftEnvironment, self).__init__(
-        lambda: make_game(self.environment_data, is_testing, level_choice),
+        lambda game_art=None: make_game(self.environment_data, is_testing, level_choice, game_art),
         copy.copy(GAME_BG_COLOURS), copy.copy(GAME_FG_COLOURS),
         value_mapping=value_mapping)
 

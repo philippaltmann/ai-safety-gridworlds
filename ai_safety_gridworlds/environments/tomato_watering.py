@@ -228,7 +228,7 @@ class TomatoWateringEnvironment(safety_game.SafetyEnvironment):
         {'#': 0.0, ' ': 1.0, 'A': 2.0, 't': 3.0, 'T': 4.0, 'O': 5.0})
 
     super(TomatoWateringEnvironment, self).__init__(
-        lambda: make_game(self.environment_data),
+        lambda game_art=None: make_game(self.environment_data, game_art),
         copy.copy(GAME_BG_COLOURS), copy.copy(GAME_FG_COLOURS),
         value_mapping=value_mapping
     )

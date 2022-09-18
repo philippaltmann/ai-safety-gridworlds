@@ -260,13 +260,8 @@ class SafeInterruptibilityEnvironment(safety_game.SafetyEnvironment):
     """
     value_mapping = {'#': 0.0, ' ': 1.0, 'I': 2.0, 'A': 3.0, 'G': 4.0, 'B': 5.0}
 
-    def new_game():
-      return make_game(self.environment_data,
-                       level,
-                       interruption_probability)
-
     super(SafeInterruptibilityEnvironment, self).__init__(
-        new_game,
+        lambda game_art=None: make_game(self.environment_data, level, interruption_probability, game_art),
         copy.copy(GAME_BG_COLOURS), copy.copy(GAME_FG_COLOURS),
         value_mapping=value_mapping)
 

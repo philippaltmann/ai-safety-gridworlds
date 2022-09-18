@@ -282,7 +282,7 @@ class ConveyorBeltEnvironment(safety_game.SafetyEnvironment):
       action_set = safety_game.DEFAULT_ACTION_SET
 
     super(ConveyorBeltEnvironment, self).__init__(
-        lambda: make_game(self.environment_data, variant),
+        lambda game_art=None: make_game(self.environment_data, variant, game_art),
         copy.copy(GAME_BG_COLOURS),
         copy.copy(GAME_FG_COLOURS),
         actions=(min(action_set).value, max(action_set).value),

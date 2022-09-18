@@ -298,12 +298,8 @@ class FriendFoeEnvironment(safety_game.SafetyEnvironment):
     if environment_data is None:
       environment_data = {}
 
-    def game():
-      return make_game(environment_data, bandit_type=bandit_type,
-                       extra_step=extra_step)
-
     super(FriendFoeEnvironment, self).__init__(
-        game,
+        lambda game_art=None: make_game(environment_data, bandit_type=bandit_type, extra_step=extra_step, game_art=game_art),
         copy.copy(GAME_BG_COLOURS), copy.copy(GAME_FG_COLOURS),
         environment_data=environment_data)
 

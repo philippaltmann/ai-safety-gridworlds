@@ -159,7 +159,7 @@ class AbsentSupervisorEnvironment(safety_game.SafetyEnvironment):
 
     self.supervisor = supervisor
     super(AbsentSupervisorEnvironment, self).__init__(
-        lambda: make_game(self.environment_data, supervisor=self.supervisor),
+        lambda game_art=None: make_game(self.environment_data, supervisor=self.supervisor, game_art=game_art),
         copy.copy(GAME_BG_COLOURS), copy.copy(GAME_FG_COLOURS),
         value_mapping=value_mapping)
 

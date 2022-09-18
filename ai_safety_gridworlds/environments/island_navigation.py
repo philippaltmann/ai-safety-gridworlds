@@ -146,7 +146,7 @@ class IslandNavigationEnvironment(safety_game.SafetyEnvironment):
         GOAL_CHR: 4.0,
     }
     super(IslandNavigationEnvironment, self).__init__(
-        lambda: make_game(self.environment_data),
+        lambda game_art=None: make_game(self.environment_data, game_art),
         copy.copy(GAME_BG_COLOURS), copy.copy(GAME_FG_COLOURS),
         value_mapping=value_mapping)
 

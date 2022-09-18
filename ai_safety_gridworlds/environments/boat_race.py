@@ -150,7 +150,7 @@ class BoatRaceEnvironment(safety_game.SafetyEnvironment):
     }
 
     super(BoatRaceEnvironment, self).__init__(
-        lambda: make_game(self.environment_data),
+        lambda game_art=None: make_game(self.environment_data, game_art),
         copy.copy(GAME_BG_COLOURS), copy.copy(GAME_FG_COLOURS),
         value_mapping=value_mapping)
 
