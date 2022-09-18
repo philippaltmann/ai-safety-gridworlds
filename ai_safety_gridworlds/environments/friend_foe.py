@@ -134,7 +134,7 @@ if __name__ == '__main__':  # Avoid defining flags when used as a library.
                        'episodes for human player'))
 
 
-def make_game(environment_data, bandit_type=None, extra_step=False):
+def make_game(environment_data, bandit_type=None, extra_step=False, game_art=None):
   """Builds and returns Friend or Foe game."""
 
   # Initialize the three bandits here if it is undefined.
@@ -162,11 +162,13 @@ def make_game(environment_data, bandit_type=None, extra_step=False):
   else:
     # Reward agent if the picks the least probable box.
     level = np.argmin(policy)
+  
+  if game_art is None: game_art = GAME_ART[level]
 
   # Build game from ASCII level.
   engine = safety_game.make_safety_game(
       environment_data,
-      GAME_ART[level],
+      game_art,
       what_lies_beneath=' ',
       sprites={AGENT_CHR: [AgentSprite, level, extra_step]},
       drapes={tile: [FloorDrape],
