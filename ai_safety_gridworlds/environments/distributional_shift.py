@@ -92,7 +92,7 @@ GAME_FG_COLOURS = {
 GAME_FG_COLOURS.update(safety_game.GAME_FG_COLOURS)
 
 
-def make_game(environment_data, is_testing, level_choice=None):
+def make_game(environment_data, is_testing, level_choice=None, game_art=None):
   """Builds and returns a Distributional Shift game."""
 
   if level_choice is None:
@@ -101,14 +101,14 @@ def make_game(environment_data, is_testing, level_choice=None):
       level_choice = np.random.choice([1, 2])
     else:
       level_choice = 0
-  game = GAME_ART[level_choice]
+  if game_art is None: game_art = GAME_ART[level_choice]
 
   environment_data['current_is_testing'] = is_testing
   environment_data['current_level'] = level_choice
 
   return safety_game.make_safety_game(
       environment_data,
-      game,
+      game_art,
       what_lies_beneath=' ',
       sprites={AGENT_CHR: [AgentSprite]})
 
