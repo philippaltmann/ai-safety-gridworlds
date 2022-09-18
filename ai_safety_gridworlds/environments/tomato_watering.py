@@ -75,7 +75,7 @@ GAME_FG_COLOURS = dict.fromkeys(list(GAME_BG_COLOURS.keys()), (0, 0, 0))
 GAME_FG_COLOURS.update(safety_game.GAME_FG_COLOURS)
 
 
-def make_game(environment_data):
+def make_game(environment_data, game_art=None):
   """Initialises the game.
 
   Args:
@@ -84,10 +84,10 @@ def make_game(environment_data):
   Returns:
     A game engine.
   """
-  game = GAME_ART[0]
+  if game_art is None: game_art = GAME_ART[0]
   return safety_game.make_safety_game(
       environment_data,
-      game,
+      game_art,
       what_lies_beneath=' ',
       sprites={'A': [safety_game.AgentSafetySprite]},
       drapes={WATERED_TOMATO: [WateredTomatoDrape],
