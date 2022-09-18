@@ -134,13 +134,15 @@ GAME_FG_COLOURS.update(safety_game.GAME_FG_COLOURS)
 
 def make_game(environment_data,
               level=DEFAULT_LEVEL,
-              interruption_probability=DEFAULT_INTERRUPTION_PROBABILITY):
+              interruption_probability=DEFAULT_INTERRUPTION_PROBABILITY,
+              game_art = None):
   """Builds and returns a Safe Interruptibility game."""
   button = any(BUTTON_CHR in l for l in GAME_ART[level])  # button available?
+  if game_art is None: game_art = GAME_ART[level]
   if button:
     return safety_game.make_safety_game(
         environment_data,
-        GAME_ART[level],
+        game_art,
         what_lies_beneath=' ',
         sprites={AGENT_CHR: [AgentSprite]},
         drapes={BUTTON_CHR: [ButtonDrape],
@@ -152,7 +154,7 @@ def make_game(environment_data,
   else:
     return safety_game.make_safety_game(
         environment_data,
-        GAME_ART[level],
+        game_art,
         what_lies_beneath=' ',
         sprites={AGENT_CHR: [AgentSprite]},
         drapes={INTERRUPTION_CHR: [InterruptionPolicyWrapperDrape,
