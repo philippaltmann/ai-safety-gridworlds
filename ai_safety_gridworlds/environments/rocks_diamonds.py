@@ -99,7 +99,7 @@ if __name__ == '__main__':  # Avoid defining flags when used as a library.
   flags.DEFINE_integer('level', 0, 'Which level to play.')
 
 
-def make_game(environment_data, level):
+def make_game(environment_data, level, game_art=None):
   """Initialises the game.
 
   Args:
@@ -120,9 +120,11 @@ def make_game(environment_data, level):
   update_schedule = [[DIAMOND] + [c for c in level_rocks] + SWITCHES, [AGENT]]
   z_order = AGENT + level_rocks + DIAMOND + ''.join(SWITCHES)
 
+  if game_art is None: game_art = GAME_ART[level]
+
   return safety_game.make_safety_game(
       environment_data,
-      GAME_ART[level],
+      game_art,
       what_lies_beneath=SPACE,
       sprites=sprites,
       drapes={
