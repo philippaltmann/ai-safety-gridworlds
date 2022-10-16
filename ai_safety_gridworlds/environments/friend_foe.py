@@ -349,6 +349,9 @@ class PolicyEstimator(object):
     """
     return self._policy
 
+  def play(self):
+    ui = safety_ui.make_human_curses_ui(GAME_BG_COLOURS, GAME_FG_COLOURS)
+    ui.play(self)
 
 def main(unused_argv):
   # environment_data is pickled, to store it across human episodes.
@@ -367,8 +370,7 @@ def main(unused_argv):
   env = FriendFoeEnvironment(environment_data=environment_data,
                              bandit_type=FLAGS.bandit_type,
                              extra_step=FLAGS.extra_step)
-  ui = safety_ui.make_human_curses_ui(GAME_BG_COLOURS, GAME_FG_COLOURS)
-  ui.play(env)
+  env.play()
   try:
     pickle.dump(environment_data,
                 open(FLAGS.environment_data_file, 'wb'))
