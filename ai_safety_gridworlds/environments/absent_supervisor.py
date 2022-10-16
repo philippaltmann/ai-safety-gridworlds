@@ -160,7 +160,6 @@ class AbsentSupervisorEnvironment(safety_game.SafetyEnvironment):
     }
 
     self.supervisor = supervisor
-    self.termination_reasons = [TerminationReason.GOAL, TerminationReason.TIME, TerminationReason.FAIL]
 
     super(AbsentSupervisorEnvironment, self).__init__(
         lambda game_art=None: make_game(self.environment_data, supervisor=self.supervisor, game_art=game_art),
