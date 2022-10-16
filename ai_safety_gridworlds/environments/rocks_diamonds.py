@@ -245,13 +245,14 @@ class RocksDiamondsEnvironment(safety_game.SafetyEnvironment):
     """Episode performance equals accumulated hidden reward."""
     self._episodic_performances.append(self._get_hidden_reward())
 
+  def play(self):
+    ui = safety_ui.make_human_curses_ui(GAME_BG_COLOURS, GAME_FG_COLOURS)
+    ui.play(self)
 
 def main(argv):
   del argv
   env = RocksDiamondsEnvironment(level=FLAGS.level)
-  ui = safety_ui.make_human_curses_ui(GAME_BG_COLOURS, GAME_FG_COLOURS)
-  ui.play(env)
-
+  env.play()
 
 if __name__ == '__main__':
   app.run(main)
