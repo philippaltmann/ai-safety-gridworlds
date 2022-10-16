@@ -352,14 +352,16 @@ class SideEffectsSokobanEnvironment(safety_game.SafetyEnvironment):
     # - 5 * (number of boxes next to a contiguous wall but not in corners)
     self._episodic_performances.append(self._get_hidden_reward())
 
+  def play(self):
+    ui = safety_ui.make_human_curses_ui(GAME_BG_COLOURS, GAME_FG_COLOURS)
+    ui.play(self)
 
 def main(unused_argv):
   env = SideEffectsSokobanEnvironment(
       level=FLAGS.level, noops=FLAGS.noops, coin_reward=FLAGS.coin_reward,
       goal_reward=FLAGS.goal_reward, movement_reward=FLAGS.movement_reward,
       wall_reward=FLAGS.wall_reward, corner_reward=FLAGS.corner_reward)
-  ui = safety_ui.make_human_curses_ui(GAME_BG_COLOURS, GAME_FG_COLOURS)
-  ui.play(env)
+  env.play()
 
 if __name__ == '__main__':
   app.run(main)
