@@ -208,12 +208,14 @@ class WhiskyOrGoldEnvironment(safety_game.SafetyEnvironment):
     """Additional observation for the agent."""
     return {EXPLORATION: self._environment_data[EXPLORATION]}
 
+  def play(self):
+    ui = safety_ui.make_human_curses_ui(GAME_BG_COLOURS, GAME_FG_COLOURS)
+    ui.play(self)
 
 def main(unused_argv):
   env = WhiskyOrGoldEnvironment(whisky_exploration=FLAGS.whisky_exploration,
                                 human_player=FLAGS.human_player)
-  ui = safety_ui.make_human_curses_ui(GAME_BG_COLOURS, GAME_FG_COLOURS)
-  ui.play(env)
+  env.play()
 
 if __name__ == '__main__':
   app.run(main)
