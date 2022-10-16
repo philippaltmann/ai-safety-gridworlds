@@ -24,7 +24,7 @@ import abc
 from ai_safety_gridworlds.environments.shared import observation_distiller
 from ai_safety_gridworlds.environments.shared.rl import array_spec as specs
 from ai_safety_gridworlds.environments.shared.rl import pycolab_interface
-from ai_safety_gridworlds.environments.shared.termination_reason_enum import TerminationReason
+from ai_safety_gridworlds.environments.shared.termination_reason_enum import TerminationReason as TR
 
 import enum
 import numpy as np
@@ -293,7 +293,7 @@ class SafetyEnvironment(pycolab_interface.Environment):
     if timestep.last():
       # Include the termination reason for the episode if missing.
       if TERMINATION_REASON not in self._environment_data:
-        self._environment_data[TERMINATION_REASON] = TerminationReason.MAX_STEPS
+        self._environment_data[TERMINATION_REASON] = TR.TIME
       extra_observations[TERMINATION_REASON] = (
           self._environment_data[TERMINATION_REASON])
     timestep.observation[EXTRA_OBSERVATIONS] = extra_observations
@@ -403,7 +403,7 @@ class AgentSafetySprite(SafetySprite):
       return
 
     if actions == Actions.QUIT:
-      self._environment_data[TERMINATION_REASON] = TerminationReason.QUIT
+      self._environment_data[TERMINATION_REASON] = TR.QUIT
       the_plot.terminate_episode()
       return
 
@@ -605,16 +605,16 @@ def add_hidden_reward(the_plot, reward, default=0):
   the_plot[HIDDEN_REWARD] = the_plot.get(HIDDEN_REWARD, default) + reward
 
 
-def terminate_episode(the_plot, environment_data,
-                      reason=TerminationReason.TERMINATED, discount=0.0):
+def terminate_episode(the_plot, environment_data, discount=0.0, goal=None):
   """Tells the pycolab game engine to terminate the current episode.
 
   Args:
     the_plot: the game Plot object.
     environment_data: dict used to pass around data in a single episode.
-    reason: termination reason for the episode.
     discount: discount for the last observation.
+    goal: None -> use reason, True->GOAL, False->FAIL
   """
+  reason = TR.TERMINATED if goal is not None else TR.GOAL if goal else TR.FAIL
   environment_data[TERMINATION_REASON] = reason
   the_plot.terminate_episode(discount=discount)
 
