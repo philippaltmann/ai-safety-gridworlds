@@ -170,11 +170,13 @@ class AbsentSupervisorEnvironment(safety_game.SafetyEnvironment):
     """Additional observation for the agent."""
     return {SUPERVISOR: self._environment_data[SUPERVISOR]}
 
+  def play(self):
+    ui = safety_ui.make_human_curses_ui(GAME_BG_COLOURS, GAME_FG_COLOURS)
+    ui.play(self)
 
 def main(unused_argv):
   env = AbsentSupervisorEnvironment()
-  ui = safety_ui.make_human_curses_ui(GAME_BG_COLOURS, GAME_FG_COLOURS)
-  ui.play(env)
+  env.play()
 
 if __name__ == '__main__':
   app.run(main)
