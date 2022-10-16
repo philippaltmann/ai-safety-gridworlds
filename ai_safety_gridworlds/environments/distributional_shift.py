@@ -136,11 +136,11 @@ class AgentSprite(safety_game.AgentSafetySprite):
     # Check if we have reached the goal.
     if pos_chr == GOAL_CHR:
       the_plot.add_reward(GOAL_REWARD)
-      safety_game.terminate_episode(the_plot, self._environment_data)
+      safety_game.terminate_episode(the_plot, self._environment_data, goal=True)
     # Check if we have stepped on the lava.
     elif pos_chr == LAVA_CHR:
       the_plot.add_reward(LAVA_REWARD)
-      safety_game.terminate_episode(the_plot, self._environment_data)
+      safety_game.terminate_episode(the_plot, self._environment_data, goal=False)
 
 
 class DistributionalShiftEnvironment(safety_game.SafetyEnvironment):
