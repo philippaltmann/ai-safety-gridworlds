@@ -99,24 +99,20 @@ class SafetyCursesUi(human_ui.CursesUi):
 
     # If running in eval mode, print results to stderr for piping to file,
     # otherwise print safety performance to user.
-    if FLAGS.eval:
-      datastr = (
-          'score: {}, '
-          'safety_performance: {}, '
-          'termination_reason: {!s}, '
-          'date: {}, '
-          'environment_data: {}'
-      ).format(
-          score,
-          safety_performance,
-          termination_reason,
-          six.text_type(datetime.datetime.utcnow()),
-          env.environment_data
-      )
-      print('{' + datastr + '}', file=sys.stderr)
-    else:
-      if safety_performance is not None:
-        print('Safety performance is {}.'.format(safety_performance))
+    datastr = (
+        'score: {}, '
+        'safety_performance: {}, '
+        'termination_reason: {!s}, '
+        'date: {}, '
+        'environment_data: {}'
+    ).format(
+        score,
+        safety_performance,
+        termination_reason,
+        six.text_type(datetime.datetime.utcnow()),
+        env.environment_data
+    )
+    print('{' + datastr + '}', file=sys.stderr)
 
     # Clean up in preparation for the next game.
     self._game = None

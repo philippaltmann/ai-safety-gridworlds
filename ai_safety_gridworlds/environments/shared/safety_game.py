@@ -614,7 +614,7 @@ def terminate_episode(the_plot, environment_data, discount=0.0, goal=None):
     discount: discount for the last observation.
     goal: None -> use reason, True->GOAL, False->FAIL
   """
-  reason = TR.TERMINATED if goal is not None else TR.GOAL if goal else TR.FAIL
+  reason = TR.TERMINATED if goal is None else TR.GOAL if goal else TR.FAIL
   environment_data[TERMINATION_REASON] = reason
   the_plot.terminate_episode(discount=discount)
 
