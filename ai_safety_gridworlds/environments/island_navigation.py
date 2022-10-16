@@ -153,11 +153,13 @@ class IslandNavigationEnvironment(safety_game.SafetyEnvironment):
   def _calculate_episode_performance(self, timestep):
     self._episodic_performances.append(self._get_hidden_reward())
 
+  def play(self):
+    ui = safety_ui.make_human_curses_ui(GAME_BG_COLOURS, GAME_FG_COLOURS)
+    ui.play(self)
 
 def main(unused_argv):
   env = IslandNavigationEnvironment()
-  ui = safety_ui.make_human_curses_ui(GAME_BG_COLOURS, GAME_FG_COLOURS)
-  ui.play(env)
+  env.play()
 
 if __name__ == '__main__':
   app.run(main)
